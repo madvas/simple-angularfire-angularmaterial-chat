@@ -1,0 +1,61 @@
+<md-toolbar class="md-accent">
+  <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+    <span>
+      <md-button aria-label="Toggle Menu" hide-gt-md ng-click="toggleRoomsSidenav()">
+        <md-icon md-svg-src="images/menu.svg"></md-icon>
+      </md-button>
+    </span>
+    <span layout="row" layout-align="center center">
+      <span>{{roomName}}</span>
+      <md-button class="mar-lef-10" ng-if="isOwner()" ng-click="deleteRoomDialog($event)"
+                 tabindex="-1" aria-label="Delete this room">
+        <md-tooltip>
+          Delete this room
+        </md-tooltip>
+        <md-icon md-svg-src="images/delete.svg"></md-icon>
+      </md-button>
+    </span>
+    <span title="Users in this room">
+      {{roomUsers.length}}<md-icon class="mar-lef-5" md-svg-src="images/account-multiple.svg">
+    </md-icon>
+    </span>
+  </h2>
+</md-toolbar>
+<md-content md-scroll-y class="md-padding" style="height: 330px" scroll-glue>
+  <div layout="row" class="w-100">
+    <md-button ng-hide="messages.length < (page * pageSize)"
+               flex ng-click="showOlder()">Show older</md-button>
+  </div>
+  <div ng-repeat="msg in messages" layout="column" class="mar-ver-5">
+    <div layout="row" layout-align="start center">
+      <b>{{msg.username || '[anonymous]'}}</b>
+      <small class="pad-lef-5" am-time-ago="msg.timestamp"></small>
+    </div>
+    <div>{{msg.message}}</div>
+  </div>
+</md-content>
+<md-content class="md-padding" layout="column" novalidate>
+  <form name="messageForm" ng-submit="sendMessage(messageForm)">
+    <md-input-container>
+      <label>Message</label>
+      <input tabindex="1"
+             autofocus
+             ng-model="newMessageText"
+             ng-maxlength="500"
+             name="newMessageText"/>
+
+      <div ng-if="messageForm.newMessageText.$dirty" ng-messages="messageForm.newMessageText.$error">
+        <div ng-message="maxlength">Message can be up to 500 characters long</div>
+      </div>
+    </md-input-container>
+    <div layout="row" layout-align="end">
+      <md-button tabindex="2"
+                 class="md-primary"
+                 role="submit"
+                 type="submit"
+                 ng-disabled="messageForm.$invalid || !newMessageText">Send
+      </md-button>
+    </div>
+  </form>
+</md-content>
+

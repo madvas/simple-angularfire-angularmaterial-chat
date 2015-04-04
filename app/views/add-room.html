@@ -1,0 +1,30 @@
+<md-dialog aria-label="New Room">
+  <form name="addRoomForm" novalidate>
+    <md-content>
+      <md-input-container>
+        <label>Room Name</label>
+        <input name="newRoomName"
+               autofocus
+               style="min-width: 400px"
+               ng-maxlength="20"
+               required=""
+               ng-model="newRoomName"/>
+
+        <div ng-if="addRoomForm.newRoomName.$dirty"
+             ng-messages="addRoomForm.newRoomName.$error">
+          <div ng-message="required">Name of the room is required</div>
+          <div ng-message="maxlength">Room name can be up to 20 characters long</div>
+        </div>
+      </md-input-container>
+    </md-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="mdDialog.cancel()">
+        Cancel
+      </md-button>
+      <md-button ng-disabled="addRoomForm.$invalid"
+                 ng-click="mdDialog.hide(newRoomName)" class="md-primary">
+        Add
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

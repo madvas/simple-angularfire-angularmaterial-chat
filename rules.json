@@ -1,0 +1,34 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "room-metadata" : {
+      ".read" : true,
+      "$roomId" : {
+        ".write": "(auth != null) && (!data.exists() || data.child('createdByUserId').val() === auth.uid)",
+        ".indexOn": ["created"],
+        "createdByUserId": {
+          ".validate": "(auth.uid === newData.val())"
+        }
+      }
+    },
+    "room-messages": {
+      "$roomId": {
+        ".read": true,
+        ".write": "(auth != null) && root.child('room-metadata').hasChild($roomId)",
+        "$msgId": {
+          ".validate": "(newData.hasChildren(['username','message','timestamp']))"
+        }
+      }
+    },
+    "room-users": {
+      "$roomId": {
+        ".read": true,
+        ".write": "root.child('room-metadata').hasChild($roomId)",
+        "$userId": {
+          ".write": "(auth != null) && ($userId === auth.uid)"
+        }
+      }
+    }
+  }
+}

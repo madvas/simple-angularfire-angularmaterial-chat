@@ -1,0 +1,9 @@
+{
+  "firebase": "simple-material-chat",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

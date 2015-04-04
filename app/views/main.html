@@ -1,0 +1,28 @@
+<md-content flex flex-gt-lg="75" class="md-whiteframe-z1">
+  <div layout="row">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="rooms-sidenav"
+                md-is-locked-open="$mdMedia('gt-md')">
+      <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+          <span>Rooms</span>
+          <md-button ng-show="!auth.isAnonymous"
+                     ng-click="addRoomDialog($event)">
+            <md-icon aria-label="add room" md-svg-src="images/plus.svg">
+            </md-icon>
+          </md-button>
+        </h2>
+      </md-toolbar>
+      <md-content md-scroll-y layout="column" style="height: 330px">
+        <div layout="row" ng-repeat="room in rooms">
+          <md-button flex class="pad-bot-10 pad-top-10"
+                     ng-class="{'md-primary' : currentRoomName === room.$id}"
+                     ui-sref="main.room({roomName: room.$id})">{{room.$id}}
+          </md-button>
+        </div>
+
+      </md-content>
+    </md-sidenav>
+    <div layout="column" class="w-100" ui-view=""></div>
+  </div>
+</md-content>
+
