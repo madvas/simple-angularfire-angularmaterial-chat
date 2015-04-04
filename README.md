@@ -1,12 +1,8 @@
-# party-app
+#Simple AngularFire & AngularMaterial Chat App  
+This is example of simple chat web app using AngularFire (Firebase) and AngularMaterial (Material Design)
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
+Users can chat anonymously or autheticated via Github. When authenticated they can create custom rooms. App also implements simple presence system, monitoring how many visitors are in each room.
 
-## Build & development
+You can find demo here: https://simple-material-chat.firebaseapp.com
 
-Run `grunt` for building and `grunt serve` for preview.
 
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
